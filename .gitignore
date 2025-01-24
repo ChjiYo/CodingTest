@@ -1,0 +1,8 @@
+*.sln
+*.vsidx
+*.suo
+*.db
+*.json
+*.vcxproj
+*.filters
+*.user
