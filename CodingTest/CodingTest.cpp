@@ -4,27 +4,15 @@ using namespace std;
 #include <vector>
 #include <algorithm>
 
-//좌표 입력 구조체
-
-typedef struct
-{
-	int iPosX;
-	int iPosY;
-}POINT;
-
-//정렬 알고리즘 사용을 위한 사용자 지정 정렬 함수
-bool PosSort(POINT tLeftPos, POINT tRightPos)
-{
-	if (tLeftPos.iPosX != tRightPos.iPosX)
-	{
-		return tLeftPos.iPosX < tRightPos.iPosX;
-	}
-	else
-		return tLeftPos.iPosY < tRightPos.iPosY;
-}
-
 int main()
 {
+	//좌표 입력 구조체
+	typedef struct
+	{
+		int iPosX;
+		int iPosY;
+	}POINT;
+
 	//값 초기화
 	int iCount(0);
 	POINT iNumber;
@@ -39,7 +27,16 @@ int main()
 		vPos.push_back(iNumber);
 	}
 
-	sort(vPos.begin(), vPos.end(),&PosSort);
+	//람다식을 활용해서 더 빠르게 시도
+	sort(vPos.begin(), vPos.end(), [](POINT tLeftPos, POINT tRightPos)
+		{
+			if (tLeftPos.iPosX != tRightPos.iPosX)
+			{
+				return tLeftPos.iPosX < tRightPos.iPosX;
+			}
+			else
+				return tLeftPos.iPosY < tRightPos.iPosY;
+		});
 
 	//값 출력
 
