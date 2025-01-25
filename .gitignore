@@ -6,3 +6,15 @@
 *.vcxproj
 *.filters
 *.user
+*.db-shm
+*.db-wal
+*.opendb
+*.recipe
+*.ilk
+*.log
+*.obj
+*.idb
+*.pdb
+*.tlog
+*.lastbuildstate
+*.exe
