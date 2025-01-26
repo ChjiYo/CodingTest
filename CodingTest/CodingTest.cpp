@@ -6,43 +6,44 @@ using namespace std;
 
 int main()
 {
-	//좌표 입력 구조체
-	typedef struct
-	{
-		int iPosX;
-		int iPosY;
-	}POINT;
 
 	//값 초기화
 	int iCount(0);
-	POINT iNumber;
-	vector<POINT> vPos;
+	int iNumber(0);
 
+	//이중 vector문으로 초기화
+	vector<vector<int>> vPos;
 	cin >> iCount;
+
+	//사이즈 초기화
+	vPos.resize(iCount);
 
 	//값 대입
 	for (int i = 0; i < iCount; ++i)
 	{
-		cin >> iNumber.iPosX >> iNumber.iPosY;
-		vPos.push_back(iNumber);
+		for(int k = 0 ; k < 2 ; ++k)
+		{ 
+			cin >> iNumber;
+			vPos.at(i).push_back(iNumber);
+		}
 	}
 
 	//람다식을 활용해서 더 빠르게 시도
-	sort(vPos.begin(), vPos.end(), [](POINT tLeftPos, POINT tRightPos)
+	sort(vPos.begin(), vPos.end(), [](vector<int> tLeftPos, vector<int> tRightPos)
 		{
-			if (tLeftPos.iPosX != tRightPos.iPosX)
+			if (tLeftPos.at(0) != tRightPos.at(0))
 			{
-				return tLeftPos.iPosX < tRightPos.iPosX;
+				return tLeftPos.at(0) < tRightPos.at(0);
 			}
 			else
-				return tLeftPos.iPosY < tRightPos.iPosY;
+				return tLeftPos.at(1) < tRightPos.at(1);
 		});
 
 	//값 출력
 
 	for (int i = 0; i < vPos.size(); ++i)
 	{
-		cout << vPos.at(i).iPosX << " "  << vPos.at(i).iPosY << endl;
+			cout << vPos.at(i).at(0) << " " << vPos.at(i).at(1) << endl;
 	}
 	
 
