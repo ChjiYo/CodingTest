@@ -25,7 +25,7 @@ int main()
 	//정렬 알고리즘
 	sort(vPos.begin(), vPos.end());
 
-	//값 출력
+	//값 출력 
 	for (int i = 0; i < vPos.size(); ++i)
 	{
 		cout << vPos.at(i).first << " " << vPos.at(i).second << '\n';
