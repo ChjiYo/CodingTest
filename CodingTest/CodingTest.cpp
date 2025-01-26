@@ -11,7 +11,7 @@ int main()
 	int iCount(0);
 	int iNumber(0);
 
-	//이중 vector문으로 초기화
+	//이중 vector문으로 초기화 
 	vector<vector<int>> vPos;
 	cin >> iCount;
 
@@ -29,21 +29,13 @@ int main()
 	}
 
 	//람다식을 활용해서 더 빠르게 시도
-	sort(vPos.begin(), vPos.end(), [](vector<int> tLeftPos, vector<int> tRightPos)
-		{
-			if (tLeftPos.at(0) != tRightPos.at(0))
-			{
-				return tLeftPos.at(0) < tRightPos.at(0);
-			}
-			else
-				return tLeftPos.at(1) < tRightPos.at(1);
-		});
+	sort(vPos.begin(), vPos.end());
 
 	//값 출력
 
 	for (int i = 0; i < vPos.size(); ++i)
 	{
-			cout << vPos.at(i).at(0) << " " << vPos.at(i).at(1) << endl;
+		cout << vPos.at(i).at(0) << " " << vPos.at(i).at(1) << endl;
 	}
 	
 
