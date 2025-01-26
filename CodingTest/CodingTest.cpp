@@ -19,7 +19,7 @@ int main()
 	for (int i = 0; i < iCount; ++i)
 	{
 		cin >> iPosX >> iPosY;
-		vPos.push_back({ iPosX  , iPosY });
+		vPos.push_back({ iPosX  , iPosY } );
 	}
 
 	//정렬 알고리즘
