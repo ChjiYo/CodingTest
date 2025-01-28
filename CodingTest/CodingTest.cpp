@@ -1,41 +1,72 @@
 using namespace std;
 
 #include <iostream>
-#include <vector>
+#include <stack>
+#include <queue>
 #include <string>
+#include <vector>
 
 int main()
 {
+
 	//값 초기화
 	int iCount(0);
-	string strPair;
-	vector<string> vecPair;
-
 	cin >> iCount;
 
+	vector<string>vecStr;
+	stack<int> stackInt;
+	queue<int> queueInt;
 
-	//vector에 값 삽입
+
+	string strWord;
+	int iNumber(0); 
+
+	//값 대입
 	for (int i = 0; i < iCount; ++i)
 	{
-		cin >> strPair;
-		vecPair.push_back(strPair);
+		cin >> strWord;
+		vecStr.push_back(strWord);
+
+		if (strWord == "push")
+		{
+			//queue에 push할 때 들어가는 값을 queue에 저장해서 순차적으로 stack에 저장할 수 있도록 구조
+			cin >> iNumber;
+			queueInt.push(iNumber);
+		}
 	}
 
-
-	//vector.at(i)안에 "()" 문자열이 있으면 그 문자를 삭제하고 삭제하고도 남은 pair가 없을 경우에는 짝이 못 이룬 것이므로 
-	//NO를 반환 vector가 비어있으면 pair가 된 거니까 YES로 반환
-	for (int i = 0; i < iCount; ++i)
+	//stack기능 구현(라이브러리) / 조건문으로 기능을 나눔
+	for (int i = 0; i < vecStr.size(); ++i)
 	{
-		while (vecPair.at(i).find("()") < 50)
+		if (vecStr.at(i) == "top")
 		{
-			vecPair.at(i).erase(vecPair.at(i).find("()"), 2);
+			stackInt.empty() ? cout << -1 << endl : cout << stackInt.top() << endl;
 		}
-
-		//출력
-		if (vecPair.at(i).empty())
-			cout << "YES" << endl;
-		else 
-			cout << "NO" << endl;
+		else if (vecStr.at(i) == "size")
+		{
+			cout << stackInt.size() << endl;
+		}
+		else if (vecStr.at(i) == "empty")
+		{
+			stackInt.empty() ? cout << 1 << endl : cout << 0 << endl;
+		}
+		else if (vecStr.at(i) == "pop")
+		{
+			if (stackInt.empty())
+			{
+				cout << -1 << endl;
+			}
+			else
+			{
+				cout << stackInt.top() << endl;
+				stackInt.pop();
+			}
+		}
+		else if (vecStr.at(i) == "push")
+		{
+			stackInt.push(queueInt.front());
+			queueInt.pop();
+		}
 	}
 
 	return 0;
