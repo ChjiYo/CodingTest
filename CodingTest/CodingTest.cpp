@@ -38,7 +38,7 @@ int main()
 
 		for (int i = 0; i < vecInt.size() - 1; ++i)
 		{
-			iAdd = vecInt.at(1) - vecInt.at(0);
+			iAdd = vecInt.at(0) - vecInt.at(1);
 
 			//하나라도 다르면 false
 			if (vecInt.at(i) - vecInt.at(i + 1) != iAdd)
