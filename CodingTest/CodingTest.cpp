@@ -2,29 +2,63 @@ using namespace std;
 
 #include <iostream>
 
-#define MAX_SIZE 1000001
 
-int arrBool[MAX_SIZE] = {0, 1};
+bool ThreeSqut(int iNumber)
+{
+	while (true)
+	{
+		iNumber /= 3;
+
+		if (iNumber == 3)
+		{
+			return 1;
+		}
+		else if (iNumber < 3)
+		{
+			return 0;
+		}
+	}
+
+	return 0;
+}
 
 int main()
 {
-	//에라토스테네스의 체 방법
-	//2부터 시작해서 해당 수를 제외한 해당 수의 배수들을 제거한다.
+	int iNumber(0);
+	int iResult(0);
 
-	//제곱 수를 다 1로 바꿈 
+	cin >> iNumber;
 
+	while (iNumber != 1)
+	{
+		if (iNumber % 6 == 0)
+		{
+			iNumber /= 2;
+			iResult++;
+		}
+		else if (iNumber % 3 == 0)
+		{
+			iNumber /= 3;
+			iResult++;
+		}
+		else if (ThreeSqut(iNumber - 1))
+		{
+			iNumber -= 1;
+			iResult++;
+		}
+		else if (iNumber % 2 == 0)
+		{
+			iNumber /= 2;
+			iResult++;
+		}
+		else 
+		{
+			iNumber -= 1;
+			iResult++;
+		}
+	}
 
-	int iMin(0);
-	int iMax(0);
-	cin >> iMin >> iMax;
-
-	for(int i = 2; i <= iMax; i++)
-		for (int k = 2; i * k <= iMax; k++)
-			arrBool[i * k] = 1;
-
-	//0인 애들 출력
-	for (int i = iMin; i <= iMax; ++i)
-		if (!arrBool[i]) cout << i << '\n';
+	cout << iResult;
 
 	return 0;
 }
