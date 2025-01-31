@@ -1,64 +1,34 @@
 using namespace std;
 
 #include <iostream>
+#include <algorithm>
 
-
-bool ThreeSqut(int iNumber)
-{
-	while (true)
-	{
-		iNumber /= 3;
-
-		if (iNumber == 3)
-		{
-			return 1;
-		}
-		else if (iNumber < 3)
-		{
-			return 0;
-		}
-	}
-
-	return 0;
-}
+#define MAX_SIZE 1000000
+int arr[MAX_SIZE];
 
 int main()
 {
 	int iNumber(0);
-	int iResult(0);
-
 	cin >> iNumber;
 
-	while (iNumber != 1)
+	for (int i = 2; i <= iNumber; ++i)
 	{
-		if (iNumber % 6 == 0)
+		//1. 1을 뺀다
+		arr[i] = arr[i - 1] + 1;
+
+		//2. 2로 나누어지면
+		if (i % 2 == 0)
 		{
-			iNumber /= 2;
-			iResult++;
+			arr[i] = min(arr[i] , arr[i / 2] + 1);
 		}
-		else if (iNumber % 3 == 0)
+
+		//3. 3으로 나누어지면
+		if (i % 3 == 0)
 		{
-			iNumber /= 3;
-			iResult++;
-		}
-		else if (ThreeSqut(iNumber - 1))
-		{
-			iNumber -= 1;
-			iResult++;
-		}
-		else if (iNumber % 2 == 0)
-		{
-			iNumber /= 2;
-			iResult++;
-		}
-		else 
-		{
-			iNumber -= 1;
-			iResult++;
+			arr[i] = min(arr[i], arr[i / 3] + 1);
 		}
 	}
 
-	cout << iResult;
-
+	cout << arr[iNumber];
 	return 0;
 }
