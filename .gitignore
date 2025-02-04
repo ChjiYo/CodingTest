@@ -1,10 +1,7 @@
-*.sln
 *.vsidx
 *.suo
 *.db
 *.json
-*.vcxproj
-*.filters
 *.user
 *.db-shm
 *.db-wal
@@ -18,3 +15,6 @@
 *.tlog
 *.lastbuildstate
 *.exe
+*.sln
+*.vcxproj
+*.filters
