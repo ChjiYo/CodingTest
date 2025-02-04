@@ -15,6 +15,6 @@
 *.tlog
 *.lastbuildstate
 *.exe
-!*.sln
-!*.vcxproj
-!*.filters
+*.sln
+*.vcxproj
+*.filters
