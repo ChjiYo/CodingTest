@@ -2,29 +2,37 @@ using namespace std;
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
+
+bool InfoSort(pair<int, string> LeftValue, pair<int, string> RightValue)
+{
+	return LeftValue.first < RightValue.first;
+}
 
 int main()
 {
-	int iNumCom(0);
-	int iNumPair(0);
-	cin >> iNumCom;
-	cin >> iNumPair;
+	//값 초기화
+	int iCount(0);
+	cin >> iCount;
 
-	vector<pair<int , int>> vecPair(iNumPair);
-	vector<bool> vecCom(iNumCom);
-	vecCom.at(0) = true;
-	
-	pair<int, int> pairInt;
-	
-	for (int i = 0; i < iNumPair; ++i)
+	vector<pair<int, string>> vecInfo;
+	int iArg(0);
+	string strName;
+
+	for (int i = 0; i < iCount; ++i)
 	{
-		cin >> pairInt.first >> pairInt.second;
-		vecPair.at(i) = { pairInt.first  , pairInt.second};
+		cin >> iArg >> strName;
+		vecInfo.push_back({ iArg , strName });
 	}
 
-	for (int i = 0; i < vecCom.size(); ++i)
+	//사용자지정 정렬 알고리즘
+	//stable_sort : 안정적인 정렬 알고리즘
+	stable_sort(vecInfo.begin(), vecInfo.end(), InfoSort);
+
+	//출력
+	for (int i = 0; i < vecInfo.size(); ++i)
 	{
-		if(i + 1)
+		cout << vecInfo.at(i).first << " " << vecInfo.at(i).second << '\n';
 	}
 
 	return 0;
