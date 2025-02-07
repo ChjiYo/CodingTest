@@ -41,7 +41,7 @@ int main(void) {
         int start, end;
         cin >> start >> end;
         G[start][end] = 1;
-        //G[end][start] = 1;
+        G[end][start] = 1;
     }
     BFS(1);
     cout << iCount << '\n';
