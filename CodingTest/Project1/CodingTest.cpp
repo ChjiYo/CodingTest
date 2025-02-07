@@ -1,49 +1,25 @@
 using namespace std;
 
 #include <iostream>
-#include <queue>
-#define MAX 101 // 100 이하의 양의 정수
 
-int iCount;
-int N, Pair;
-queue <int> Q;
-int G[MAX][MAX];
-bool visited[MAX] = { 0, };
+#define MAX_SIZE 10001
 
-void BFS(int s) {
+int iDP[MAX_SIZE];
 
-    Q.push(s);
-    visited[s] = true;
+int main()
+{
+	int iCount(0);
+	cin >> iCount;
 
-    while (!Q.empty()) {
-        s = Q.front();
-        Q.pop();
+	iDP[1] = 1;
+	iDP[2] = 2;
 
-        for (int i = 1; i <= N; i++) {
-            if (G[s][i] == 1 && visited[i] == 0) {
-                // 경로가 있는데 방문하지 않았을 경우
-                Q.push(i);
-                visited[i] = true;
-                iCount++;
-            }
-        }
-    }
-}
+	for (int i = 3; i <= iCount; ++i)
+	{
+		iDP[i] = (iDP[i - 1]  %  10007)+ (iDP[i - 2] % 10007);
+	}
 
-int main(void) {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+	cout << iDP[iCount] % 10007;
 
-    cin >> N >> Pair;
-
-    for (int i = 0; i < Pair; i++) {
-        int start, end;
-        cin >> start >> end;
-        G[start][end] = 1;
-        G[end][start] = 1;
-    }
-    BFS(1);
-    cout << iCount << '\n';
-    return 0;
+	return 0;
 }
