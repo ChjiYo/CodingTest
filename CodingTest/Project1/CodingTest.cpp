@@ -1,54 +1,49 @@
 using namespace std;
 
 #include <iostream>
-#include <vector>
 #include <queue>
+#define MAX 101 // 100 이하의 양의 정수
 
-#define MAX_SIZE 100
-vector<int> graph[MAX_SIZE];
-bool visited[MAX_SIZE];
+int iCount;
+int N, Pair;
+queue <int> Q;
+int G[MAX][MAX];
+bool visited[MAX] = { 0, };
 
-void BFS(int _iBeginIndex)
-{
-	queue<int> q;
-	q.push(_iBeginIndex);
-	visited[_iBeginIndex] = true;
+void BFS(int s) {
 
-	while (!q.empty())
-	{
-		int node = q.front();
-		q.pop();
-		cout << node << " "; 
-	
-		for (int next : graph[node])
-		{
-			if (!visited[next])
-			{
-				visited[next] = true;
-				q.push(next);
-			}
-		}
-	}
+    Q.push(s);
+    visited[s] = true;
+
+    while (!Q.empty()) {
+        s = Q.front();
+        Q.pop();
+
+        for (int i = 1; i <= N; i++) {
+            if (G[s][i] == 1 && visited[i] == 0) {
+                // 경로가 있는데 방문하지 않았을 경우
+                Q.push(i);
+                visited[i] = true;
+                iCount++;
+            }
+        }
+    }
 }
 
-int main()
-{
-	graph[1].push_back(1);
-	graph[1].push_back(2);
-	graph[1].push_back(3);
-	graph[1].push_back(4);
+int main(void) {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
-	graph[2].push_back(6);
-	graph[2].push_back(5);
-	graph[2].push_back(7);
-	graph[2].push_back(8);
-	graph[2].push_back(9);
-	graph[2].push_back(10);
+    cin >> N >> Pair;
 
-	graph[3].push_back(11);
-	graph[3].push_back(12);
-
-	BFS(2);
-
-	return 0;
+    for (int i = 0; i < Pair; i++) {
+        int start, end;
+        cin >> start >> end;
+        G[start][end] = 1;
+        //G[end][start] = 1;
+    }
+    BFS(1);
+    cout << iCount << '\n';
+    return 0;
 }
