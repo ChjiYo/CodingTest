@@ -2,38 +2,53 @@ using namespace std;
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
+#include <queue>
 
-bool InfoSort(pair<int, string> LeftValue, pair<int, string> RightValue)
+#define MAX_SIZE 100
+vector<int> graph[MAX_SIZE];
+bool visited[MAX_SIZE];
+
+void BFS(int _iBeginIndex)
 {
-	return LeftValue.first < RightValue.first;
+	queue<int> q;
+	q.push(_iBeginIndex);
+	visited[_iBeginIndex] = true;
+
+	while (!q.empty())
+	{
+		int node = q.front();
+		q.pop();
+		cout << node << " "; 
+	
+		for (int next : graph[node])
+		{
+			if (!visited[next])
+			{
+				visited[next] = true;
+				q.push(next);
+			}
+		}
+	}
 }
 
 int main()
 {
-	//값 초기화
-	int iCount(0);
-	cin >> iCount;
+	graph[1].push_back(1);
+	graph[1].push_back(2);
+	graph[1].push_back(3);
+	graph[1].push_back(4);
 
-	vector<pair<int, string>> vecInfo;
-	int iArg(0);
-	string strName;
+	graph[2].push_back(6);
+	graph[2].push_back(5);
+	graph[2].push_back(7);
+	graph[2].push_back(8);
+	graph[2].push_back(9);
+	graph[2].push_back(10);
 
-	for (int i = 0; i < iCount; ++i)
-	{
-		cin >> iArg >> strName;
-		vecInfo.push_back({ iArg , strName });
-	}
+	graph[3].push_back(11);
+	graph[3].push_back(12);
 
-	//사용자지정 정렬 알고리즘
-	//stable_sort : 안정적인 정렬 알고리즘
-	stable_sort(vecInfo.begin(), vecInfo.end(), InfoSort);
-
-	//출력
-	for (int i = 0; i < vecInfo.size(); ++i)
-	{
-		cout << vecInfo.at(i).first << " " << vecInfo.at(i).second << '\n';
-	}
+	BFS(2);
 
 	return 0;
 }
