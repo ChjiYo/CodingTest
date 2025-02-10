@@ -32,6 +32,7 @@ int main()
 	
 
 
+
 	cout << arr[iNumber];
 	return 0;
 }
